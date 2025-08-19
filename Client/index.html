@@ -406,6 +406,273 @@
             border: 1px solid rgba(255, 100, 100, 0.3);
         }
 
+        /* Batch Processing Styles */
+        .batch-section {
+            background: linear-gradient(145deg, #3a3a4e 0%, #2e2e3e 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .batch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .batch-header h2 {
+            color: #e0e0e0;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        .batch-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-button {
+            padding: 8px 20px;
+            border: 2px solid rgba(0, 191, 255, 0.4);
+            border-radius: 25px;
+            background: transparent;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-button:hover {
+            border-color: rgba(0, 191, 255, 0.7);
+            color: #d0d0d0;
+        }
+
+        .mode-button.active {
+            background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+            color: white;
+            border-color: #00bfff;
+        }
+
+        .files-overview {
+            margin-bottom: 25px;
+        }
+
+        .files-overview h3 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .files-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: linear-gradient(145deg, #4a4a5e 0%, #3e3e4e 100%);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+            color: #d0d0d0;
+            font-size: 0.9rem;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-status {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .status-ready {
+            background: rgba(0, 191, 255, 0.2);
+            color: #66ddff;
+        }
+
+        .status-error {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff8888;
+        }
+
+        .status-processing {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .album-controls {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #4a4a5e 0%, #3e3e4e 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+        }
+
+        .album-controls h3 {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .album-controls p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .album-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .album-form h4 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .album-actions {
+            margin-top: 20px;
+        }
+
+        .individual-controls {
+            margin-top: 20px;
+        }
+
+        .batch-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border: 2px solid rgba(0, 191, 255, 0.4);
+            border-radius: 20px;
+            background: transparent;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;  
+        }
+
+        .action-button:hover {
+            border-color: rgba(0, 191, 255, 0.7);
+            color: #d0d0d0;
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        .individual-files-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .individual-file-card {
+            background: linear-gradient(145deg, #4a4a5e 0%, #3e3e4e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .individual-file-card:hover {
+            border-color: rgba(0, 191, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .file-card-title {
+            color: #e0e0e0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .file-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #00bfff;
+        }
+
+        .file-metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .file-metadata-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .file-metadata-group label {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+            font-weight: 600;
+        }
+
+        .file-metadata-group input {
+            padding: 6px 10px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: linear-gradient(145deg, #5a5a6e 0%, #4e4e5e 100%);
+            color: #e0e0e0;
+        }
+
+        .file-metadata-group input:focus {
+            outline: none;
+            border-color: #00bfff;
+            box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.2);
+        }
+
+        .file-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .file-action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preview-btn {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+        }
+
+        .preview-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
+        }
+
         @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -492,6 +759,52 @@
                 padding: 12px 30px;
                 font-size: 1rem;
             }
+
+            .batch-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .batch-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .batch-controls {
+                justify-content: center;
+            }
+
+            .mode-button {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .album-controls {
+                padding: 15px;
+            }
+
+            .batch-actions {
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .action-button {
+                flex: 1;
+                min-width: 80px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .file-metadata-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .file-card-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 480px) {
@@ -556,6 +869,53 @@
                 max-width: 250px;
                 height: 35px;
             }
+
+            .batch-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .batch-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .batch-controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .mode-button {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .album-controls {
+                padding: 12px;
+            }
+
+            .batch-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-button {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .individual-file-card {
+                padding: 15px;
+            }
+
+            .file-card-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .file-action-btn {
+                width: 100%;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -570,12 +930,12 @@
         <div class="content">
             <div class="upload-section">
                 <div class="file-input-wrapper">
-                    <input type="file" id="fileInput" class="file-input" accept=".mp3" />
+                    <input type="file" id="fileInput" class="file-input" accept=".mp3" multiple />
                     <label for="fileInput" class="file-input-button">
-                        Choose MP3 File
+                        Choose MP3 Files
                     </label>
                 </div>
-                <p>or drag and drop an MP3 file here</p>
+                <p>or drag and drop MP3 files here (supports multiple files)</p>
                 <div id="fileName" class="file-name"></div>
             </div>
 
@@ -585,6 +945,104 @@
             </div>
 
             <div id="alerts"></div>
+
+            <!-- Batch Processing Section -->
+            <div id="batchSection" class="batch-section" style="display: none;">
+                <div class="batch-header">
+                    <h2>Batch Processing</h2>
+                    <div class="batch-controls">
+                        <button type="button" id="albumModeBtn" class="mode-button">
+                            Album Mode
+                        </button>
+                        <button type="button" id="individualModeBtn" class="mode-button active">
+                            Individual Mode
+                        </button>
+                    </div>
+                </div>
+
+                <div class="files-overview">
+                    <h3>Selected Files (<span id="fileCount">0</span>)</h3>
+                    <div id="filesList" class="files-list"></div>
+                </div>
+
+                <!-- Album Mode Controls -->
+                <div id="albumControls" class="album-controls" style="display: none;">
+                    <h3>Album Settings</h3>
+                    <p>Apply these settings to all tracks in the album:</p>
+
+                    <div class="album-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="albumTitle">Album Title</label>
+                                <input type="text" id="albumTitle" placeholder="Album name">
+                            </div>
+                            <div class="form-group">
+                                <label for="albumArtistGlobal">Album Artist</label>
+                                <input type="text" id="albumArtistGlobal" placeholder="Album artist">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="albumYear">Year</label>
+                                <input type="number" id="albumYear" placeholder="2024" min="1900" max="2100">
+                            </div>
+                            <div class="form-group">
+                                <label for="albumGenre">Genre</label>
+                                <input type="text" id="albumGenre" placeholder="Genre">
+                            </div>
+                        </div>
+
+                        <div class="album-cover-section">
+                            <h4>Album Cover (applies to all tracks)</h4>
+                            <div class="cover-preview">
+                                <div id="albumCoverContainer">
+                                    <div class="no-cover" id="albumNoCover"
+                                        onclick="document.getElementById('albumCoverInput').click()">
+                                        <div>
+                                            <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+                                            <div>No Album Cover</div>
+                                            <div style="font-size: 0.75rem; margin-top: 4px; opacity: 0.7;">Click to
+                                                upload</div>
+                                        </div>
+                                    </div>
+                                    <img id="albumCoverImage" class="cover-image" style="display: none;"
+                                        alt="Album Cover">
+                                </div>
+                            </div>
+                            <div class="cover-controls">
+                                <input type="file" id="albumCoverInput" class="cover-file-input" accept="image/*">
+                                <button type="button" class="cover-button upload-cover-btn"
+                                    onclick="document.getElementById('albumCoverInput').click()">
+                                    Upload Cover
+                                </button>
+                                <button type="button" class="cover-button remove-cover-btn" id="removeAlbumCoverBtn"
+                                    disabled>
+                                    Remove Cover
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="album-actions">
+                            <button type="button" id="applyToAllBtn" class="save-button">
+                                Apply Album Settings to All Tracks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Individual Files List -->
+                <div id="individualControls" class="individual-controls">
+                    <div class="batch-actions">
+                        <button type="button" id="selectAllBtn" class="action-button">Select All</button>
+                        <button type="button" id="deselectAllBtn" class="action-button">Deselect All</button>
+                        <button type="button" id="downloadSelectedBtn" class="save-button" disabled>
+                            Download Selected Files
+                        </button>
+                    </div>
+                    <div id="individualFilesList" class="individual-files-list"></div>
+                </div>
+            </div>
 
             <div id="metadataForm" class="metadata-form">
                 <h2
@@ -679,200 +1137,660 @@
     </div>
 
     <script>
-        let currentFile = null;
-        let originalMetadata = {};
-        let fileArrayBuffer = null;
-        let currentCoverImage = null;
-        let removeCover = false;
+        // Global state management
+        let currentFiles = [];
+        let currentMode = 'individual'; // 'individual' or 'album'
+        let albumCoverImageData = null;
+        let selectedFiles = new Set();
 
+        // DOM elements
         const fileInput = document.getElementById('fileInput');
         const fileName = document.getElementById('fileName');
         const metadataForm = document.getElementById('metadataForm');
-        const editForm = document.getElementById('editForm');
-        const audioPreview = document.getElementById('audioPreview');
         const loading = document.getElementById('loading');
         const alerts = document.getElementById('alerts');
-        const coverFileInput = document.getElementById('coverFileInput');
-        const coverImage = document.getElementById('coverImage');
-        const noCover = document.getElementById('noCover');
-        const removeCoverBtn = document.getElementById('removeCoverBtn');
+        const batchSection = document.getElementById('batchSection');
+        const fileCount = document.getElementById('fileCount');
+        const filesList = document.getElementById('filesList');
+        const individualControls = document.getElementById('individualControls');
+        const albumControls = document.getElementById('albumControls');
+        const individualModeBtn = document.getElementById('individualModeBtn');
+        const albumModeBtn = document.getElementById('albumModeBtn');
+        const individualFilesList = document.getElementById('individualFilesList');
 
+        // Album mode elements
+        const albumCoverInput = document.getElementById('albumCoverInput');
+        const albumCoverImage = document.getElementById('albumCoverImage');
+        const albumNoCover = document.getElementById('albumNoCover');
+        const removeAlbumCoverBtn = document.getElementById('removeAlbumCoverBtn');
+        const applyToAllBtn = document.getElementById('applyToAllBtn');
+
+        // Batch action elements
+        const selectAllBtn = document.getElementById('selectAllBtn');
+        const deselectAllBtn = document.getElementById('deselectAllBtn');
+        const downloadSelectedBtn = document.getElementById('downloadSelectedBtn');
+
+        // Event listeners
         fileInput.addEventListener('change', handleFileSelect);
-        editForm.addEventListener('submit', handleFormSubmit);
-        coverFileInput.addEventListener('change', handleCoverSelect);
-        removeCoverBtn.addEventListener('click', handleRemoveCover);
+        individualModeBtn.addEventListener('click', () => switchMode('individual'));
+        albumModeBtn.addEventListener('click', () => switchMode('album'));
+        albumCoverInput.addEventListener('change', handleAlbumCoverSelect);
+        removeAlbumCoverBtn.addEventListener('click', handleRemoveAlbumCover);
+        applyToAllBtn.addEventListener('click', handleApplyToAll);
+        selectAllBtn.addEventListener('click', handleSelectAll);
+        deselectAllBtn.addEventListener('click', handleDeselectAll);
+        downloadSelectedBtn.addEventListener('click', handleDownloadSelected);
+
+        // File processing class
+        class MP3File {
+            constructor(file) {
+                this.file = file;
+                this.name = file.name;
+                this.metadata = {};
+                this.originalMetadata = {};
+                this.arrayBuffer = null;
+                this.coverImage = null;
+                this.status = 'pending'; // pending, ready, error, processing
+                this.error = null;
+                this.selected = true;
+            }
+
+            async loadMetadata() {
+                try {
+                    this.status = 'processing';
+                    this.arrayBuffer = await this.file.arrayBuffer();
+
+                    return new Promise((resolve, reject) => {
+                        window.jsmediatags.read(this.file, {
+                            onSuccess: (tag) => {
+                                this.metadata = {
+                                    title: tag.tags.title || '',
+                                    artist: tag.tags.artist || '',
+                                    album: tag.tags.album || '',
+                                    year: tag.tags.year || '',
+                                    genre: tag.tags.genre || '',
+                                    track: tag.tags.track || '',
+                                    albumArtist: tag.tags.albumartist || ''
+                                };
+
+                                if (tag.tags.picture) {
+                                    this.coverImage = {
+                                        data: new Uint8Array(tag.tags.picture.data),
+                                        format: tag.tags.picture.format
+                                    };
+                                }
+
+                                this.originalMetadata = { ...this.metadata };
+                                this.status = 'ready';
+                                resolve(this);
+                            },
+                            onError: (error) => {
+                                console.warn(`Error reading metadata for ${this.name}:`, error);
+                                // Still allow editing with empty metadata
+                                this.metadata = {
+                                    title: '',
+                                    artist: '',
+                                    album: '',
+                                    year: '',
+                                    genre: '',
+                                    track: '',
+                                    albumArtist: ''
+                                };
+                                this.originalMetadata = { ...this.metadata };
+                                this.status = 'ready';
+                                resolve(this);
+                            }
+                        });
+                    });
+                } catch (error) {
+                    this.status = 'error';
+                    this.error = error.message;
+                    throw error;
+                }
+            }
+
+            async saveWithMetadata(metadata, coverImage = null, removeCover = false) {
+                try {
+                    const writer = new ID3Writer(this.arrayBuffer);
+
+                    // Set metadata tags
+                    if (metadata.title) writer.setFrame('TIT2', metadata.title);
+                    if (metadata.artist) writer.setFrame('TPE1', [metadata.artist]);
+                    if (metadata.album) writer.setFrame('TALB', metadata.album);
+                    if (metadata.year) writer.setFrame('TYER', metadata.year);
+                    if (metadata.genre) writer.setFrame('TCON', [metadata.genre]);
+                    if (metadata.track) writer.setFrame('TRCK', metadata.track);
+                    if (metadata.albumArtist) writer.setFrame('TPE2', [metadata.albumArtist]);
+
+                    // Handle album cover
+                    if (!removeCover && (coverImage || this.coverImage)) {
+                        const cover = coverImage || this.coverImage;
+                        writer.setFrame('APIC', {
+                            type: 3,
+                            data: cover.data,
+                            description: 'Cover'
+                        });
+                    }
+
+                    writer.addTag();
+                    return writer.arrayBuffer;
+                } catch (error) {
+                    console.error(`Error saving metadata for ${this.name}:`, error);
+                    throw error;
+                }
+            }
+        }
 
         function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
 
-            if (!file.type.includes('audio/mpeg') && !file.name.toLowerCase().endsWith('.mp3')) {
-                showAlert('Please select a valid MP3 file.', 'error');
+            // Validate all files are MP3
+            const invalidFiles = files.filter(file =>
+                !file.type.includes('audio/mpeg') && !file.name.toLowerCase().endsWith('.mp3')
+            );
+
+            if (invalidFiles.length > 0) {
+                showAlert(`Invalid files detected: ${invalidFiles.map(f => f.name).join(', ')}. Please select only MP3 files.`, 'error');
                 return;
             }
 
-            currentFile = file;
-            // fileName.textContent = `Selected: ${file.name}`;
+            // If single file, show traditional interface
+            if (files.length === 1) {
+                handleSingleFile(files[0]);
+                return;
+            }
 
-            // Create audio preview
-            const audioUrl = URL.createObjectURL(file);
-            audioPreview.src = audioUrl;
-            audioPreview.style.display = 'block';
-
-            loadMetadata(file);
+            // Multiple files - show batch interface
+            handleMultipleFiles(files);
         }
 
-        async function loadMetadata(file) {
-            loading.style.display = 'block';
+        function handleSingleFile(file) {
+            batchSection.style.display = 'none';
             metadataForm.style.display = 'none';
+
+            const mp3File = new MP3File(file);
+            loadSingleFileMetadata(mp3File);
+        }
+
+        async function loadSingleFileMetadata(mp3File) {
+            loading.style.display = 'block';
             clearAlerts();
 
             try {
-                // Convert file to ArrayBuffer for later use
-                fileArrayBuffer = await file.arrayBuffer();
+                await mp3File.loadMetadata();
 
-                // Use jsmediatags to read metadata
-                window.jsmediatags.read(file, {
-                    onSuccess: function (tag) {
-                        const metadata = {
-                            title: tag.tags.title || '',
-                            artist: tag.tags.artist || '',
-                            album: tag.tags.album || '',
-                            year: tag.tags.year || '',
-                            genre: tag.tags.genre || '',
-                            track: tag.tags.track || '',
-                            albumArtist: tag.tags.albumartist || ''
-                        };
+                // Show traditional single-file interface
+                displaySingleFileForm(mp3File);
 
-                        // Handle album artwork
-                        if (tag.tags.picture) {
-                            displayCoverImage(tag.tags.picture);
-                        } else {
-                            showNoCover();
-                        }
-
-                        originalMetadata = metadata;
-                        populateForm(metadata);
-
-                        loading.style.display = 'none';
-                        metadataForm.style.display = 'block';
-                    },
-                    onError: function (error) {
-                        console.error('Error reading metadata:', error);
-
-                        // If metadata reading fails, still allow editing with empty fields
-                        const emptyMetadata = {
-                            title: '',
-                            artist: '',
-                            album: '',
-                            year: '',
-                            genre: '',
-                            track: '',
-                            albumArtist: ''
-                        };
-
-                        showNoCover();
-                        originalMetadata = emptyMetadata;
-                        populateForm(emptyMetadata);
-
-                        loading.style.display = 'none';
-                        metadataForm.style.display = 'block';
-
-                        showAlert('Could not read existing metadata, but you can still add new metadata.', 'error');
-                    }
-                });
-
+                loading.style.display = 'none';
+                metadataForm.style.display = 'block';
             } catch (error) {
                 loading.style.display = 'none';
                 showAlert(`Error processing file: ${error.message}`, 'error');
-                console.error('Error processing file:', error);
             }
         }
 
-        function populateForm(metadata) {
-            document.getElementById('title').value = metadata.title || '';
-            document.getElementById('artist').value = metadata.artist || '';
-            document.getElementById('album').value = metadata.album || '';
-            document.getElementById('year').value = metadata.year || '';
-            document.getElementById('genre').value = metadata.genre || '';
-            document.getElementById('track').value = metadata.track || '';
-            document.getElementById('albumArtist').value = metadata.albumArtist || '';
-        }
+        function displaySingleFileForm(mp3File) {
+            metadataForm.innerHTML = `
+                <h2 style="margin-bottom: 25px; color: #e0e0e0; text-align: center; text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);">
+                    Edit Metadata
+                </h2>
 
-        async function handleFormSubmit(event) {
-            event.preventDefault();
+                <div class="audio-preview">
+                    <audio controls style="width: 100%; max-width: 350px; border-radius: 10px; background: linear-gradient(145deg, #4a4a5e 0%, #3e3e4e 100%); border: 1px solid rgba(0, 191, 255, 0.3);">
+                        <source src="${URL.createObjectURL(mp3File.file)}" type="audio/mpeg">
+                    </audio>
+                </div>
 
-            if (!currentFile || !fileArrayBuffer) {
-                showAlert('Please select an MP3 file first.', 'error');
-                return;
+                <div class="album-cover-section">
+                    <h3>Album Cover</h3>
+                    <div class="cover-preview">
+                        <div id="coverImageContainer">
+                            ${mp3File.coverImage ?
+                    `<img id="coverImage" class="cover-image" src="data:${mp3File.coverImage.format};base64,${btoa(String.fromCharCode(...mp3File.coverImage.data))}" alt="Album Cover">` :
+                    `<div class="no-cover" id="noCover" onclick="document.getElementById('coverFileInput').click()">
+                                    <div>
+                                        <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+                                        <div>No Album Cover</div>
+                                        <div style="font-size: 0.75rem; margin-top: 4px; opacity: 0.7;">Click to upload</div>
+                                    </div>
+                                </div>`
+                }
+                        </div>
+                    </div>
+                    <div class="cover-controls">
+                        <input type="file" id="coverFileInput" class="cover-file-input" accept="image/*">
+                        <button type="button" class="cover-button upload-cover-btn" onclick="document.getElementById('coverFileInput').click()">
+                            Upload Cover
+                        </button>
+                        <button type="button" class="cover-button remove-cover-btn" id="removeCoverBtn" ${!mp3File.coverImage ? 'disabled' : ''}>
+                            Remove Cover
+                        </button>
+                    </div>
+                    <div class="cover-info">
+                        Supported formats: JPEG, PNG, GIF | Max size: 2MB
+                    </div>
+                </div>
+
+                <form id="editForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" placeholder="Song title" value="${mp3File.metadata.title}">
+                        </div>
+                        <div class="form-group">
+                            <label for="artist">Artist</label>
+                            <input type="text" id="artist" name="artist" placeholder="Artist name" value="${mp3File.metadata.artist}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="album">Album</label>
+                            <input type="text" id="album" name="album" placeholder="Album name" value="${mp3File.metadata.album}">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input type="number" id="year" name="year" placeholder="2024" min="1900" max="2100" value="${mp3File.metadata.year}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <input type="text" id="genre" name="genre" placeholder="Genre" value="${mp3File.metadata.genre}">
+                        </div>
+                        <div class="form-group">
+                            <label for="track">Track Number</label>
+                            <input type="number" id="track" name="track" placeholder="1" min="1" value="${mp3File.metadata.track}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="albumArtist">Album Artist</label>
+                        <input type="text" id="albumArtist" name="albumArtist" placeholder="Album artist" value="${mp3File.metadata.albumArtist}">
+                    </div>
+
+                    <button type="submit" class="save-button">
+                        Save Metadata Changes
+                    </button>
+                </form>
+            `;
+
+            // Add event listeners for single file form
+            document.getElementById('editForm').addEventListener('submit', (e) => handleSingleFileSave(e, mp3File));
+
+            // Cover image handling
+            let currentCoverImage = mp3File.coverImage;
+            let removeCover = false;
+
+            document.getElementById('coverFileInput').addEventListener('change', (e) => {
+                handleCoverImageSelect(e, (coverData) => {
+                    currentCoverImage = coverData;
+                    removeCover = false;
+                    updateCoverDisplay(coverData);
+                });
+            });
+
+            document.getElementById('removeCoverBtn').addEventListener('click', () => {
+                removeCover = true;
+                currentCoverImage = null;
+                updateCoverDisplay(null);
+                showAlert('Album cover will be removed when you save the metadata.', 'success');
+            });
+
+            function updateCoverDisplay(coverData) {
+                const container = document.getElementById('coverImageContainer');
+                if (coverData) {
+                    container.innerHTML = `<img id="coverImage" class="cover-image" src="data:${coverData.format};base64,${btoa(String.fromCharCode(...coverData.data))}" alt="Album Cover">`;
+                    document.getElementById('removeCoverBtn').disabled = false;
+                } else {
+                    container.innerHTML = `<div class="no-cover" id="noCover" onclick="document.getElementById('coverFileInput').click()">
+                        <div>
+                            <div style="font-size: 2rem; margin-bottom: 8px;">🖼️</div>
+                            <div>No Album Cover</div>
+                            <div style="font-size: 0.75rem; margin-top: 4px; opacity: 0.7;">Click to upload</div>
+                        </div>
+                    </div>`;
+                    document.getElementById('removeCoverBtn').disabled = true;
+                }
             }
 
-            const saveButton = event.target.querySelector('.save-button');
-            saveButton.disabled = true;
-            saveButton.textContent = 'Saving...';
+            async function handleSingleFileSave(event, mp3File) {
+                event.preventDefault();
+                const saveButton = event.target.querySelector('.save-button');
+                saveButton.disabled = true;
+                saveButton.textContent = 'Saving...';
+                clearAlerts();
+
+                try {
+                    const metadata = {
+                        title: document.getElementById('title').value.trim(),
+                        artist: document.getElementById('artist').value.trim(),
+                        album: document.getElementById('album').value.trim(),
+                        year: document.getElementById('year').value.trim(),
+                        genre: document.getElementById('genre').value.trim(),
+                        track: document.getElementById('track').value.trim(),
+                        albumArtist: document.getElementById('albumArtist').value.trim()
+                    };
+
+                    const modifiedBuffer = await mp3File.saveWithMetadata(metadata, currentCoverImage, removeCover);
+                    downloadFile(modifiedBuffer, mp3File.name.replace('.mp3', '_edited.mp3'));
+                    showAlert('Metadata updated successfully! The edited file has been downloaded.', 'success');
+                } catch (error) {
+                    showAlert(`Error saving metadata: ${error.message}`, 'error');
+                } finally {
+                    saveButton.disabled = false;
+                    saveButton.textContent = 'Save Metadata Changes';
+                }
+            }
+        }
+
+        async function handleMultipleFiles(files) {
+            metadataForm.style.display = 'none';
+            batchSection.style.display = 'block';
+
+            currentFiles = files.map(file => new MP3File(file));
+            selectedFiles = new Set(currentFiles.map((_, index) => index));
+
+            updateFileCount();
+            updateFilesOverview();
+
+            // Load metadata for all files
+            loading.style.display = 'block';
             clearAlerts();
 
             try {
-                // Get metadata from form
-                const metadata = {
-                    title: document.getElementById('title').value.trim(),
-                    artist: document.getElementById('artist').value.trim(),
-                    album: document.getElementById('album').value.trim(),
-                    year: document.getElementById('year').value.trim(),
-                    genre: document.getElementById('genre').value.trim(),
-                    track: document.getElementById('track').value.trim(),
-                    albumArtist: document.getElementById('albumArtist').value.trim()
+                await Promise.all(currentFiles.map(file => file.loadMetadata()));
+                loading.style.display = 'none';
+                updateFilesOverview();
+                updateIndividualFilesList();
+                updateDownloadButton();
+            } catch (error) {
+                loading.style.display = 'none';
+                showAlert('Some files could not be processed. Check individual file status.', 'error');
+                updateFilesOverview();
+                updateIndividualFilesList();
+            }
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+
+            individualModeBtn.classList.toggle('active', mode === 'individual');
+            albumModeBtn.classList.toggle('active', mode === 'album');
+
+            individualControls.style.display = mode === 'individual' ? 'block' : 'none';
+            albumControls.style.display = mode === 'album' ? 'block' : 'none';
+        }
+
+        function updateFileCount() {
+            fileCount.textContent = currentFiles.length;
+        }
+
+        function updateFilesOverview() {
+            filesList.innerHTML = currentFiles.map((file, index) => `
+                <div class="file-item">
+                    <span>${file.name}</span>
+                    <span class="file-status status-${file.status}">${file.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function updateIndividualFilesList() {
+            individualFilesList.innerHTML = currentFiles.map((file, index) => {
+                const isSelected = selectedFiles.has(index);
+                return `
+                    <div class="individual-file-card ${isSelected ? 'selected' : ''}" data-index="${index}">
+                        <div class="file-card-header">
+                            <span class="file-card-title">${file.name}</span>
+                            <input type="checkbox" class="file-checkbox" ${isSelected ? 'checked' : ''} 
+                                   onchange="toggleFileSelection(${index})">
+                        </div>
+                        
+                        <div class="file-metadata-grid">
+                            <div class="file-metadata-group">
+                                <label>Title</label>
+                                <input type="text" value="${file.metadata.title}" 
+                                       onchange="updateFileMetadata(${index}, 'title', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Artist</label>
+                                <input type="text" value="${file.metadata.artist}" 
+                                       onchange="updateFileMetadata(${index}, 'artist', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Album</label>
+                                <input type="text" value="${file.metadata.album}" 
+                                       onchange="updateFileMetadata(${index}, 'album', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Year</label>
+                                <input type="number" value="${file.metadata.year}" min="1900" max="2100"
+                                       onchange="updateFileMetadata(${index}, 'year', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Genre</label>
+                                <input type="text" value="${file.metadata.genre}" 
+                                       onchange="updateFileMetadata(${index}, 'genre', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Track</label>
+                                <input type="number" value="${file.metadata.track}" min="1"
+                                       onchange="updateFileMetadata(${index}, 'track', this.value)">
+                            </div>
+                            <div class="file-metadata-group">
+                                <label>Album Artist</label>
+                                <input type="text" value="${file.metadata.albumArtist}" 
+                                       onchange="updateFileMetadata(${index}, 'albumArtist', this.value)">
+                            </div>
+                        </div>
+                        
+                        <div class="file-card-actions">
+                            <button class="file-action-btn preview-btn" onclick="previewFile(${index})">
+                                🎵 Preview
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleFileSelection(index) {
+            if (selectedFiles.has(index)) {
+                selectedFiles.delete(index);
+            } else {
+                selectedFiles.add(index);
+            }
+            updateDownloadButton();
+            updateIndividualFilesList();
+        }
+
+        function updateFileMetadata(index, field, value) {
+            if (currentFiles[index]) {
+                currentFiles[index].metadata[field] = value;
+            }
+        }
+
+        function handleSelectAll() {
+            selectedFiles = new Set(currentFiles.map((_, index) => index));
+            updateDownloadButton();
+            updateIndividualFilesList();
+        }
+
+        function handleDeselectAll() {
+            selectedFiles.clear();
+            updateDownloadButton();
+            updateIndividualFilesList();
+        }
+
+        function updateDownloadButton() {
+            downloadSelectedBtn.disabled = selectedFiles.size === 0;
+            downloadSelectedBtn.textContent = `Download Selected Files (${selectedFiles.size})`;
+        }
+
+        function previewFile(index) {
+            const file = currentFiles[index];
+            if (!file) return;
+
+            // Create a temporary audio element for preview
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            audio.src = URL.createObjectURL(file.file);
+            audio.style.width = '100%';
+            audio.style.marginTop = '10px';
+
+            // Remove any existing preview
+            const existingPreview = document.querySelector('.temp-audio-preview');
+            if (existingPreview) {
+                existingPreview.remove();
+            }
+
+            // Add preview to the file card
+            const fileCard = document.querySelector(`[data-index="${index}"]`);
+            audio.className = 'temp-audio-preview';
+            fileCard.appendChild(audio);
+
+            // Auto-remove after playing or after 30 seconds
+            setTimeout(() => {
+                if (audio.parentNode) {
+                    audio.parentNode.removeChild(audio);
+                }
+            }, 30000);
+        }
+
+        function handleAlbumCoverSelect(event) {
+            handleCoverImageSelect(event, (coverData) => {
+                albumCoverImageData = coverData;
+                updateAlbumCoverDisplay(coverData);
+                showAlert('Album cover uploaded successfully!', 'success');
+            });
+        }
+
+        function handleCoverImageSelect(event, callback) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showAlert('Please select a valid image file.', 'error');
+                return;
+            }
+
+            if (file.size > 2 * 1024 * 1024) {
+                showAlert('Image file size must be less than 2MB.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const arrayBuffer = e.target.result;
+                const uint8Array = new Uint8Array(arrayBuffer);
+                const coverData = {
+                    data: uint8Array,
+                    format: file.type
                 };
+                callback(coverData);
+            };
 
-                // Create new ID3 writer instance
-                const writer = new ID3Writer(fileArrayBuffer);
+            reader.onerror = function () {
+                showAlert('Error reading image file.', 'error');
+            };
 
-                // Set metadata tags (only if they have values)
-                // Some frames expect arrays of strings, others expect single strings
-                if (metadata.title) writer.setFrame('TIT2', metadata.title);
-                if (metadata.artist) writer.setFrame('TPE1', [metadata.artist]);
-                if (metadata.album) writer.setFrame('TALB', metadata.album);
-                if (metadata.year) writer.setFrame('TYER', metadata.year);
-                if (metadata.genre) writer.setFrame('TCON', [metadata.genre]);
-                if (metadata.track) writer.setFrame('TRCK', metadata.track);
-                if (metadata.albumArtist) writer.setFrame('TPE2', [metadata.albumArtist]);
+            reader.readAsArrayBuffer(file);
+        }
 
-                // Handle album cover
-                if (removeCover) {
-                    // Don't add any cover (effectively removes it)
-                } else if (currentCoverImage) {
-                    // Add new cover image
-                    writer.setFrame('APIC', {
-                        type: 3, // Cover (front)
-                        data: currentCoverImage.data,
-                        description: 'Cover'
-                    });
+        function updateAlbumCoverDisplay(coverData) {
+            if (coverData) {
+                albumCoverImage.src = `data:${coverData.format};base64,${btoa(String.fromCharCode(...coverData.data))}`;
+                albumCoverImage.style.display = 'block';
+                albumNoCover.style.display = 'none';
+                removeAlbumCoverBtn.disabled = false;
+            } else {
+                albumCoverImage.style.display = 'none';
+                albumNoCover.style.display = 'flex';
+                removeAlbumCoverBtn.disabled = true;
+            }
+        }
+
+        function handleRemoveAlbumCover() {
+            albumCoverImageData = null;
+            updateAlbumCoverDisplay(null);
+            albumCoverInput.value = '';
+            showAlert('Album cover will be removed from all tracks when applied.', 'success');
+        }
+
+        function handleApplyToAll() {
+            const albumData = {
+                album: document.getElementById('albumTitle').value.trim(),
+                albumArtist: document.getElementById('albumArtistGlobal').value.trim(),
+                year: document.getElementById('albumYear').value.trim(),
+                genre: document.getElementById('albumGenre').value.trim()
+            };
+
+            // Apply album data to all files
+            currentFiles.forEach(file => {
+                if (albumData.album) file.metadata.album = albumData.album;
+                if (albumData.albumArtist) file.metadata.albumArtist = albumData.albumArtist;
+                if (albumData.year) file.metadata.year = albumData.year;
+                if (albumData.genre) file.metadata.genre = albumData.genre;
+            });
+
+            // Update the individual files display
+            updateIndividualFilesList();
+            showAlert('Album settings applied to all tracks!', 'success');
+        }
+
+        async function handleDownloadSelected() {
+            if (selectedFiles.size === 0) return;
+
+            downloadSelectedBtn.disabled = true;
+            downloadSelectedBtn.textContent = 'Processing...';
+            clearAlerts();
+
+            try {
+                const filesToProcess = Array.from(selectedFiles).map(index => currentFiles[index]);
+
+                if (filesToProcess.length === 1) {
+                    // Single file download
+                    const file = filesToProcess[0];
+                    const modifiedBuffer = await file.saveWithMetadata(file.metadata, albumCoverImageData, !albumCoverImageData);
+                    downloadFile(modifiedBuffer, file.name.replace('.mp3', '_edited.mp3'));
+                } else {
+                    // Multiple files - download as zip (if available) or individual files
+                    for (let i = 0; i < filesToProcess.length; i++) {
+                        const file = filesToProcess[i];
+                        downloadSelectedBtn.textContent = `Processing... (${i + 1}/${filesToProcess.length})`;
+
+                        const modifiedBuffer = await file.saveWithMetadata(file.metadata, albumCoverImageData, !albumCoverImageData);
+                        downloadFile(modifiedBuffer, file.name.replace('.mp3', '_edited.mp3'));
+
+                        // Small delay between downloads to avoid browser issues
+                        if (i < filesToProcess.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 500));
+                        }
+                    }
                 }
 
-                // Add the tags and get the buffer
-                writer.addTag();
-                const modifiedBuffer = writer.arrayBuffer;
-
-                // Create blob and download
-                const blob = new Blob([modifiedBuffer], { type: 'audio/mpeg' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = currentFile.name.replace('.mp3', '_edited.mp3');
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-
-                showAlert('Metadata updated successfully! The edited file has been downloaded.', 'success');
-
+                showAlert(`Successfully processed ${filesToProcess.length} file(s)!`, 'success');
             } catch (error) {
-                showAlert(`Error saving metadata: ${error.message}`, 'error');
-                console.error('Error saving metadata:', error);
+                showAlert(`Error processing files: ${error.message}`, 'error');
             } finally {
-                saveButton.disabled = false;
-                saveButton.textContent = 'Save Metadata Changes';
+                downloadSelectedBtn.disabled = false;
+                updateDownloadButton();
             }
+        }
+
+        function downloadFile(arrayBuffer, filename) {
+            const blob = new Blob([arrayBuffer], { type: 'audio/mpeg' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         }
 
         function showAlert(message, type) {
@@ -881,7 +1799,6 @@
             alert.textContent = message;
             alerts.appendChild(alert);
 
-            // Auto-remove success alerts after 5 seconds
             if (type === 'success') {
                 setTimeout(() => {
                     if (alert.parentNode) {
@@ -895,86 +1812,7 @@
             alerts.innerHTML = '';
         }
 
-        function displayCoverImage(picture) {
-            const { data, format } = picture;
-            const base64String = btoa(String.fromCharCode(...new Uint8Array(data)));
-            const imageUrl = `data:${format};base64,${base64String}`;
-
-            coverImage.src = imageUrl;
-            coverImage.style.display = 'block';
-            noCover.style.display = 'none';
-            removeCoverBtn.disabled = false;
-
-            // Store current cover for potential reuse
-            currentCoverImage = {
-                data: new Uint8Array(data),
-                format: format
-            };
-            removeCover = false;
-        }
-
-        function showNoCover() {
-            coverImage.style.display = 'none';
-            noCover.style.display = 'flex';
-            removeCoverBtn.disabled = true;
-            currentCoverImage = null;
-            removeCover = false;
-        }
-
-        function handleCoverSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                showAlert('Please select a valid image file.', 'error');
-                return;
-            }
-
-            // Validate file size (2MB limit)
-            if (file.size > 2 * 1024 * 1024) {
-                showAlert('Image file size must be less than 2MB.', 'error');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const arrayBuffer = e.target.result;
-                const uint8Array = new Uint8Array(arrayBuffer);
-
-                // Display the image
-                const imageUrl = URL.createObjectURL(file);
-                coverImage.src = imageUrl;
-                coverImage.style.display = 'block';
-                noCover.style.display = 'none';
-                removeCoverBtn.disabled = false;
-
-                // Store the image data
-                currentCoverImage = {
-                    data: uint8Array,
-                    format: file.type
-                };
-                removeCover = false;
-
-                showAlert('Album cover uploaded successfully!', 'success');
-            };
-
-            reader.onerror = function () {
-                showAlert('Error reading image file.', 'error');
-            };
-
-            reader.readAsArrayBuffer(file);
-        }
-
-        function handleRemoveCover() {
-            showNoCover();
-            removeCover = true;
-            currentCoverImage = null;
-            coverFileInput.value = ''; // Clear the input
-            showAlert('Album cover will be removed when you save the metadata.', 'success');
-        }
-
-        // Add drag and drop functionality
+        // Drag and drop functionality
         const uploadSection = document.querySelector('.upload-section');
 
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -1018,6 +1856,11 @@
                 handleFileSelect({ target: { files: files } });
             }
         }
+
+        // Make functions globally available for onclick handlers
+        window.toggleFileSelection = toggleFileSelection;
+        window.updateFileMetadata = updateFileMetadata;
+        window.previewFile = previewFile;
     </script>
 </body>
 
