@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MP3 Metadata Editor</title>
+    <link rel="icon" href="favicon.ico">
     <!-- Include required libraries for client-side MP3 metadata handling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/browser-id3-writer@4.4.0/dist/browser-id3-writer.min.js"></script>
@@ -19,7 +20,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
+            height: 100vh;
             padding: 20px;
+            padding-bottom: 50px;
+            overflow-x: auto;
         }
 
         .container {
@@ -431,6 +435,8 @@
 
             .header p {
                 font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 10px;
             }
 
             .upload-section {
@@ -508,6 +514,14 @@
 
             .header h1 {
                 font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                padding: 0 15px;
+                margin-bottom: 5px;
             }
 
             .upload-section {
@@ -549,7 +563,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎵 MP3 Metadata Editor</h1>
+            <h1>MP3 Metadata Editor</h1>
             <p>Upload your MP3 files and edit their metadata entirely in your browser - no server required!</p>
         </div>
 
@@ -558,7 +572,7 @@
                 <div class="file-input-wrapper">
                     <input type="file" id="fileInput" class="file-input" accept=".mp3" />
                     <label for="fileInput" class="file-input-button">
-                        📁 Choose MP3 File
+                        Choose MP3 File
                     </label>
                 </div>
                 <p>or drag and drop an MP3 file here</p>
@@ -601,10 +615,10 @@
                         <input type="file" id="coverFileInput" class="cover-file-input" accept="image/*">
                         <button type="button" class="cover-button upload-cover-btn"
                             onclick="document.getElementById('coverFileInput').click()">
-                            🖼️ Upload Cover
+                            Upload Cover
                         </button>
                         <button type="button" class="cover-button remove-cover-btn" id="removeCoverBtn" disabled>
-                            🗑️ Remove Cover
+                            Remove Cover
                         </button>
                     </div>
                     <div class="cover-info">
@@ -652,11 +666,16 @@
                     </div>
 
                     <button type="submit" class="save-button">
-                        💾 Save Metadata Changes
+                        Save Metadata Changes
                     </button>
                 </form>
             </div>
         </div>
+    </div>
+
+    <div
+        style="text-align: center; padding: 10px; opacity: 0.4; position: fixed; bottom: 5px; left: 0; right: 0; width: 100%; pointer-events: none; z-index: -1;">
+        <p style="color: #a0a0a0; font-size: 0.75rem; font-style: italic; margin: 0;">Made by Tomeš</p>
     </div>
 
     <script>
@@ -693,7 +712,7 @@
             }
 
             currentFile = file;
-            fileName.textContent = `Selected: ${file.name}`;
+            // fileName.textContent = `Selected: ${file.name}`;
 
             // Create audio preview
             const audioUrl = URL.createObjectURL(file);
@@ -790,7 +809,7 @@
 
             const saveButton = event.target.querySelector('.save-button');
             saveButton.disabled = true;
-            saveButton.textContent = '💾 Saving...';
+            saveButton.textContent = 'Saving...';
             clearAlerts();
 
             try {
@@ -809,13 +828,14 @@
                 const writer = new ID3Writer(fileArrayBuffer);
 
                 // Set metadata tags (only if they have values)
+                // Some frames expect arrays of strings, others expect single strings
                 if (metadata.title) writer.setFrame('TIT2', metadata.title);
-                if (metadata.artist) writer.setFrame('TPE1', metadata.artist);
+                if (metadata.artist) writer.setFrame('TPE1', [metadata.artist]);
                 if (metadata.album) writer.setFrame('TALB', metadata.album);
                 if (metadata.year) writer.setFrame('TYER', metadata.year);
-                if (metadata.genre) writer.setFrame('TCON', metadata.genre);
+                if (metadata.genre) writer.setFrame('TCON', [metadata.genre]);
                 if (metadata.track) writer.setFrame('TRCK', metadata.track);
-                if (metadata.albumArtist) writer.setFrame('TPE2', metadata.albumArtist);
+                if (metadata.albumArtist) writer.setFrame('TPE2', [metadata.albumArtist]);
 
                 // Handle album cover
                 if (removeCover) {
@@ -851,7 +871,7 @@
                 console.error('Error saving metadata:', error);
             } finally {
                 saveButton.disabled = false;
-                saveButton.textContent = '💾 Save Metadata Changes';
+                saveButton.textContent = 'Save Metadata Changes';
             }
         }
 
