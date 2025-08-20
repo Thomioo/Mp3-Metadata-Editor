@@ -19,8 +19,8 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            height: 100vh;
             padding: 20px;
             padding-bottom: 50px;
             overflow-x: auto;
@@ -543,10 +543,6 @@
             font-size: 1.1rem;
         }
 
-        .album-actions {
-            margin-top: 20px;
-        }
-
         .individual-controls {
             margin-top: 20px;
         }
@@ -567,7 +563,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;  
+            transition: all 0.3s ease;
         }
 
         .action-button:hover {
@@ -597,20 +593,25 @@
         .file-card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 15px;
+            gap: 10px;
         }
 
         .file-card-title {
             color: #e0e0e0;
             font-weight: 600;
             font-size: 1rem;
+            word-break: break-all;
+            line-height: 1.3;
         }
 
         .file-checkbox {
             width: 18px;
             height: 18px;
             accent-color: #00bfff;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .file-metadata-grid {
@@ -671,6 +672,48 @@
         .preview-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
+        }
+
+        /* Album mode synced fields highlighting */
+        .album-synced {
+            background: linear-gradient(145deg, #4a5a7e 0%, #3e4e6e 100%) !important;
+            border-color: rgba(102, 221, 255, 0.6) !important;
+            box-shadow: 0 0 8px rgba(102, 221, 255, 0.3) !important;
+        }
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(145deg, #2a2a3e 0%, #24243e 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 191, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(145deg, #4a4a5e 0%, #3e3e4e 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(145deg, #5a5a6e 0%, #4e4e5e 100%);
+            border-color: rgba(0, 191, 255, 0.4);
+            box-shadow: 0 0 6px rgba(0, 191, 255, 0.2);
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: linear-gradient(145deg, #2a2a3e 0%, #24243e 100%);
+        }
+
+        /* Firefox scrollbar */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #4a4a5e #2a2a3e;
         }
 
         @media (max-width: 768px) {
@@ -805,6 +848,24 @@
                 justify-content: center;
                 flex-wrap: wrap;
             }
+
+            .file-card-header {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .file-card-title {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+                flex: 1;
+            }
+
+            .file-checkbox-container {
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -839,6 +900,16 @@
 
             .upload-section {
                 padding: 15px;
+            }
+
+            .upload-section p {
+                font-size: 0.85rem;
+                margin-top: 8px;
+            }
+
+            .file-input-button {
+                padding: 12px 25px;
+                font-size: 1rem;
             }
 
             .metadata-form {
@@ -968,7 +1039,8 @@
                 <!-- Album Mode Controls -->
                 <div id="albumControls" class="album-controls" style="display: none;">
                     <h3>Album Settings</h3>
-                    <p>Apply these settings to all tracks in the album:</p>
+                    <p>Set album-wide metadata that applies to all tracks. Changes are applied automatically as you
+                        type.</p>
 
                     <div class="album-form">
                         <div class="form-row">
@@ -1021,12 +1093,6 @@
                                     Remove Cover
                                 </button>
                             </div>
-                        </div>
-
-                        <div class="album-actions">
-                            <button type="button" id="applyToAllBtn" class="save-button">
-                                Apply Album Settings to All Tracks
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -1163,7 +1229,6 @@
         const albumCoverImage = document.getElementById('albumCoverImage');
         const albumNoCover = document.getElementById('albumNoCover');
         const removeAlbumCoverBtn = document.getElementById('removeAlbumCoverBtn');
-        const applyToAllBtn = document.getElementById('applyToAllBtn');
 
         // Batch action elements
         const selectAllBtn = document.getElementById('selectAllBtn');
@@ -1176,7 +1241,6 @@
         albumModeBtn.addEventListener('click', () => switchMode('album'));
         albumCoverInput.addEventListener('change', handleAlbumCoverSelect);
         removeAlbumCoverBtn.addEventListener('click', handleRemoveAlbumCover);
-        applyToAllBtn.addEventListener('click', handleApplyToAll);
         selectAllBtn.addEventListener('click', handleSelectAll);
         deselectAllBtn.addEventListener('click', handleDeselectAll);
         downloadSelectedBtn.addEventListener('click', handleDownloadSelected);
@@ -1283,15 +1347,13 @@
 
         function handleFileSelect(event) {
             const files = Array.from(event.target.files);
+
             if (files.length === 0) return;
 
-            // Validate all files are MP3
-            const invalidFiles = files.filter(file =>
-                !file.type.includes('audio/mpeg') && !file.name.toLowerCase().endsWith('.mp3')
-            );
-
+            // Validate MP3 files
+            const invalidFiles = files.filter(file => !file.name.toLowerCase().endsWith('.mp3'));
             if (invalidFiles.length > 0) {
-                showAlert(`Invalid files detected: ${invalidFiles.map(f => f.name).join(', ')}. Please select only MP3 files.`, 'error');
+                showAlert(`Please select only MP3 files. Invalid files: ${invalidFiles.map(f => f.name).join(', ')}`, 'error');
                 return;
             }
 
@@ -1507,10 +1569,49 @@
                 updateFilesOverview();
                 updateIndividualFilesList();
                 updateDownloadButton();
+
+                // Set up album mode input listeners for real-time sync
+                setupAlbumModeListeners();
             } catch (error) {
                 loading.style.display = 'none';
                 showAlert('Some files could not be processed. Check individual file status.', 'error');
                 updateFilesOverview();
+                updateIndividualFilesList();
+                setupAlbumModeListeners();
+            }
+        }
+
+        function setupAlbumModeListeners() {
+            // Add event listeners to album mode inputs for real-time sync
+            const albumInputs = [
+                { id: 'albumTitle', field: 'album' },
+                { id: 'albumArtistGlobal', field: 'albumArtist' },
+                { id: 'albumYear', field: 'year' },
+                { id: 'albumGenre', field: 'genre' }
+            ];
+
+            albumInputs.forEach(({ id, field }) => {
+                const input = document.getElementById(id);
+                if (input) {
+                    // Remove existing listeners to prevent duplicates
+                    input.removeEventListener('input', handleAlbumInputChange);
+
+                    // Add new listener
+                    input.addEventListener('input', function () {
+                        handleAlbumInputChange(field, this.value);
+                    });
+                }
+            });
+        }
+
+        function handleAlbumInputChange(field, value) {
+            // Apply the change to all files immediately
+            currentFiles.forEach(file => {
+                file.metadata[field] = value.trim();
+            });
+
+            // Update individual mode display in real-time if it's currently visible
+            if (currentMode === 'individual') {
                 updateIndividualFilesList();
             }
         }
@@ -1523,6 +1624,89 @@
 
             individualControls.style.display = mode === 'individual' ? 'block' : 'none';
             albumControls.style.display = mode === 'album' ? 'block' : 'none';
+
+            // When switching to album mode, populate fields with common values
+            if (mode === 'album' && currentFiles.length > 0) {
+                populateAlbumModeFromFiles();
+            }
+
+            // When switching to individual mode, refresh the files list to show updated values
+            if (mode === 'individual' && currentFiles.length > 0) {
+                updateIndividualFilesList();
+            }
+        }
+
+        function populateAlbumModeFromFiles() {
+            // Get common values from all files
+            const commonValues = getCommonMetadata();
+
+            // Populate album mode inputs
+            const albumTitle = document.getElementById('albumTitle');
+            const albumArtistGlobal = document.getElementById('albumArtistGlobal');
+            const albumYear = document.getElementById('albumYear');
+            const albumGenre = document.getElementById('albumGenre');
+
+            if (albumTitle) albumTitle.value = commonValues.album || '';
+            if (albumArtistGlobal) albumArtistGlobal.value = commonValues.albumArtist || '';
+            if (albumYear) albumYear.value = commonValues.year || '';
+            if (albumGenre) albumGenre.value = commonValues.genre || '';
+
+            // Check if all files have the same album cover
+            const commonCover = getCommonAlbumCover();
+            if (commonCover) {
+                albumCoverImageData = commonCover;
+                updateAlbumCoverDisplay(commonCover);
+            }
+        }
+
+        function getCommonMetadata() {
+            if (currentFiles.length === 0) return {};
+
+            const firstFile = currentFiles[0];
+            const common = {
+                album: firstFile.metadata.album,
+                albumArtist: firstFile.metadata.albumArtist,
+                year: firstFile.metadata.year,
+                genre: firstFile.metadata.genre
+            };
+
+            // Check if all files have the same values
+            currentFiles.forEach(file => {
+                if (file.metadata.album !== common.album) common.album = '';
+                if (file.metadata.albumArtist !== common.albumArtist) common.albumArtist = '';
+                if (file.metadata.year !== common.year) common.year = '';
+                if (file.metadata.genre !== common.genre) common.genre = '';
+            });
+
+            return common;
+        }
+
+        function getCommonAlbumCover() {
+            if (currentFiles.length === 0) return null;
+
+            // Get the first file's cover as reference
+            const firstFile = currentFiles[0];
+            if (!firstFile.coverImage) return null;
+
+            const referenceCover = firstFile.coverImage;
+
+            // Check if all files have the same cover image
+            const allHaveSameCover = currentFiles.every(file => {
+                if (!file.coverImage) return false;
+
+                // Compare cover image data
+                if (file.coverImage.format !== referenceCover.format) return false;
+                if (file.coverImage.data.length !== referenceCover.data.length) return false;
+
+                // Compare byte by byte
+                for (let i = 0; i < file.coverImage.data.length; i++) {
+                    if (file.coverImage.data[i] !== referenceCover.data[i]) return false;
+                }
+
+                return true;
+            });
+
+            return allHaveSameCover ? referenceCover : null;
         }
 
         function updateFileCount() {
@@ -1539,14 +1723,58 @@
         }
 
         function updateIndividualFilesList() {
+            // Get current album mode values for comparison
+            const albumValues = {
+                album: document.getElementById('albumTitle')?.value || '',
+                albumArtist: document.getElementById('albumArtistGlobal')?.value || '',
+                year: document.getElementById('albumYear')?.value || '',
+                genre: document.getElementById('albumGenre')?.value || ''
+            };
+
             individualFilesList.innerHTML = currentFiles.map((file, index) => {
                 const isSelected = selectedFiles.has(index);
+                const fileCover = file.coverImage || albumCoverImageData;
+
+                // Get display name: use track title if available, otherwise use "Song #"
+                const displayName = file.metadata.title ? file.metadata.title : `Song ${index + 1}`;
+
                 return `
                     <div class="individual-file-card ${isSelected ? 'selected' : ''}" data-index="${index}">
                         <div class="file-card-header">
-                            <span class="file-card-title">${file.name}</span>
+                            <div class="file-card-title">${displayName}</div>
                             <input type="checkbox" class="file-checkbox" ${isSelected ? 'checked' : ''} 
                                    onchange="toggleFileSelection(${index})">
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                                <div style="flex-shrink: 0;">
+                                    ${fileCover ? `
+                                        <img src="data:${fileCover.format};base64,${btoa(String.fromCharCode(...fileCover.data))}" 
+                                             style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(0, 191, 255, 0.3);" 
+                                             alt="Cover Art">
+                                    ` : `
+                                        <div style="width: 120px; height: 120px; background: linear-gradient(145deg, #5a5a6e 0%, #4e4e5e 100%); border: 1px dashed rgba(0, 191, 255, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #a0a0a0; font-size: 0.7rem; text-align: center;">
+                                            No Cover
+                                        </div>
+                                    `}
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+                                    <input type="file" id="individualCover${index}" accept="image/*" style="display: none;" 
+                                           onchange="handleIndividualCoverSelect(${index}, event)">
+                                    <button type="button" class="file-action-btn" 
+                                            style="background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%); color: white; font-size: 0.75rem; padding: 6px 12px; border-radius: 12px;"
+                                            onclick="document.getElementById('individualCover${index}').click()">
+                                        Change
+                                    </button>
+                                    <button type="button" class="file-action-btn" 
+                                            style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; font-size: 0.75rem; padding: 6px 12px; border-radius: 12px;"
+                                            onclick="removeIndividualCover(${index})"
+                                            ${!fileCover ? 'disabled style="opacity: 0.5;"' : ''}>
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="file-metadata-grid">
@@ -1563,16 +1791,19 @@
                             <div class="file-metadata-group">
                                 <label>Album</label>
                                 <input type="text" value="${file.metadata.album}" 
+                                       class="${albumValues.album && file.metadata.album === albumValues.album ? 'album-synced' : ''}"
                                        onchange="updateFileMetadata(${index}, 'album', this.value)">
                             </div>
                             <div class="file-metadata-group">
                                 <label>Year</label>
                                 <input type="number" value="${file.metadata.year}" min="1900" max="2100"
+                                       class="${albumValues.year && file.metadata.year === albumValues.year ? 'album-synced' : ''}"
                                        onchange="updateFileMetadata(${index}, 'year', this.value)">
                             </div>
                             <div class="file-metadata-group">
                                 <label>Genre</label>
                                 <input type="text" value="${file.metadata.genre}" 
+                                       class="${albumValues.genre && file.metadata.genre === albumValues.genre ? 'album-synced' : ''}"
                                        onchange="updateFileMetadata(${index}, 'genre', this.value)">
                             </div>
                             <div class="file-metadata-group">
@@ -1583,6 +1814,7 @@
                             <div class="file-metadata-group">
                                 <label>Album Artist</label>
                                 <input type="text" value="${file.metadata.albumArtist}" 
+                                       class="${albumValues.albumArtist && file.metadata.albumArtist === albumValues.albumArtist ? 'album-synced' : ''}"
                                        onchange="updateFileMetadata(${index}, 'albumArtist', this.value)">
                             </div>
                         </div>
@@ -1610,6 +1842,18 @@
         function updateFileMetadata(index, field, value) {
             if (currentFiles[index]) {
                 currentFiles[index].metadata[field] = value;
+
+                // If title was changed, update the display immediately
+                if (field === 'title') {
+                    const fileCard = document.querySelector(`[data-index="${index}"]`);
+                    if (fileCard) {
+                        const titleElement = fileCard.querySelector('.file-card-title');
+                        if (titleElement) {
+                            const displayName = value ? value : `Song ${index + 1}`;
+                            titleElement.textContent = displayName;
+                        }
+                    }
+                }
             }
         }
 
@@ -1634,37 +1878,45 @@
             const file = currentFiles[index];
             if (!file) return;
 
-            // Create a temporary audio element for preview
+            const fileCard = document.querySelector(`[data-index="${index}"]`);
+            const existingPreview = fileCard.querySelector('.temp-audio-preview');
+
+            // Toggle: if preview exists, remove it
+            if (existingPreview) {
+                existingPreview.remove();
+                return;
+            }
+
+            // Create a new audio element for preview
             const audio = document.createElement('audio');
             audio.controls = true;
             audio.src = URL.createObjectURL(file.file);
             audio.style.width = '100%';
             audio.style.marginTop = '10px';
-
-            // Remove any existing preview
-            const existingPreview = document.querySelector('.temp-audio-preview');
-            if (existingPreview) {
-                existingPreview.remove();
-            }
+            audio.className = 'temp-audio-preview';
 
             // Add preview to the file card
-            const fileCard = document.querySelector(`[data-index="${index}"]`);
-            audio.className = 'temp-audio-preview';
             fileCard.appendChild(audio);
 
-            // Auto-remove after playing or after 30 seconds
+            // Auto-remove after 2 minutes if not manually toggled
             setTimeout(() => {
                 if (audio.parentNode) {
                     audio.parentNode.removeChild(audio);
                 }
-            }, 30000);
+            }, 120000);
         }
 
         function handleAlbumCoverSelect(event) {
             handleCoverImageSelect(event, (coverData) => {
                 albumCoverImageData = coverData;
                 updateAlbumCoverDisplay(coverData);
-                showAlert('Album cover uploaded successfully!', 'success');
+
+                // Immediately apply to individual mode display if visible
+                if (currentMode === 'individual') {
+                    updateIndividualFilesList();
+                }
+
+                showAlert('Album cover uploaded successfully! This will be applied to all tracks.', 'success');
             });
         }
 
@@ -1717,28 +1969,58 @@
             albumCoverImageData = null;
             updateAlbumCoverDisplay(null);
             albumCoverInput.value = '';
-            showAlert('Album cover will be removed from all tracks when applied.', 'success');
+
+            // Immediately update individual mode display if visible
+            if (currentMode === 'individual') {
+                updateIndividualFilesList();
+            }
+
+            showAlert('Album cover will be removed from all tracks.', 'success');
         }
 
-        function handleApplyToAll() {
-            const albumData = {
-                album: document.getElementById('albumTitle').value.trim(),
-                albumArtist: document.getElementById('albumArtistGlobal').value.trim(),
-                year: document.getElementById('albumYear').value.trim(),
-                genre: document.getElementById('albumGenre').value.trim()
+        function handleIndividualCoverSelect(index, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showAlert('Please select a valid image file.', 'error');
+                return;
+            }
+
+            if (file.size > 2 * 1024 * 1024) {
+                showAlert('Image file size must be less than 2MB.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const arrayBuffer = e.target.result;
+                const uint8Array = new Uint8Array(arrayBuffer);
+                const coverData = {
+                    data: uint8Array,
+                    format: file.type
+                };
+
+                // Set the individual file's cover
+                currentFiles[index].coverImage = coverData;
+
+                // Update the display
+                updateIndividualFilesList();
+
+                showAlert(`Cover updated for ${currentFiles[index].name}`, 'success');
             };
 
-            // Apply album data to all files
-            currentFiles.forEach(file => {
-                if (albumData.album) file.metadata.album = albumData.album;
-                if (albumData.albumArtist) file.metadata.albumArtist = albumData.albumArtist;
-                if (albumData.year) file.metadata.year = albumData.year;
-                if (albumData.genre) file.metadata.genre = albumData.genre;
-            });
+            reader.onerror = function () {
+                showAlert('Error reading image file.', 'error');
+            };
 
-            // Update the individual files display
+            reader.readAsArrayBuffer(file);
+        }
+
+        function removeIndividualCover(index) {
+            currentFiles[index].coverImage = null;
             updateIndividualFilesList();
-            showAlert('Album settings applied to all tracks!', 'success');
+            showAlert(`Cover removed from ${currentFiles[index].name}`, 'success');
         }
 
         async function handleDownloadSelected() {
@@ -1757,7 +2039,7 @@
                     const modifiedBuffer = await file.saveWithMetadata(file.metadata, albumCoverImageData, !albumCoverImageData);
                     downloadFile(modifiedBuffer, file.name.replace('.mp3', '_edited.mp3'));
                 } else {
-                    // Multiple files - download as zip (if available) or individual files
+                    // Multiple files - download individual files
                     for (let i = 0; i < filesToProcess.length; i++) {
                         const file = filesToProcess[i];
                         downloadSelectedBtn.textContent = `Processing... (${i + 1}/${filesToProcess.length})`;
@@ -1861,6 +2143,8 @@
         window.toggleFileSelection = toggleFileSelection;
         window.updateFileMetadata = updateFileMetadata;
         window.previewFile = previewFile;
+        window.handleIndividualCoverSelect = handleIndividualCoverSelect;
+        window.removeIndividualCover = removeIndividualCover;
     </script>
 </body>
 
